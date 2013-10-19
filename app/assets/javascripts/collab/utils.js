@@ -1,3 +1,37 @@
+function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+}
+
+function guid() {
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+
+ko.bindingHandlers.htmlValue = {
+    init: function(element, valueAccessor, allBindingsAccessor) {
+        ko.utils.registerEventHandler(element, "keyup", function() {
+            var modelValue = valueAccessor();
+            var elementValue = element.innerHTML;
+            if (ko.isWriteableObservable(modelValue)) {
+                modelValue(elementValue);
+                
+            }
+            else { //handle non-observable one-way binding
+                var allBindings = allBindingsAccessor();
+                if (allBindings['_ko_property_writers'] && allBindings['_ko_property_writers'].htmlValue) allBindings['_ko_property_writers'].htmlValue(elementValue);
+            }
+        }
+                                     )
+    },
+    update: function(element, valueAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor()) || "";
+        if (element.innerHTML !== value) {
+            element.innerHTML = value;    
+        }
+    }
+};
+
 (function (utils, undefined) {
 	var $doc = $(document),
 		$contentModal = $('#content-modal');

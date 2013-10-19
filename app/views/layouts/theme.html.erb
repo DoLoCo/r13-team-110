@@ -27,6 +27,7 @@
 		</div><!-- /container-fluid -->
 
 		<%= render "shared/content_modal" %>
+		<%= content_tag(:div, '', data: { theme: ThemeSerializer.new(@theme).to_json }) %>
 		<%= javascript_include_tag "application" %>
 	</body>
 </html>

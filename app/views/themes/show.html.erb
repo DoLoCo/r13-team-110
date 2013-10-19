@@ -3,7 +3,7 @@
 			<div class="container-fluid">
 				<a class="brand" href="#">Project name | Theme</a>
 				<form class="navbar-form pull-right">
-					<button class="btn btn-primary" id="add-idea">
+					<button class="btn btn-primary" data-bind="click: $root.themeVM.addIdea">
 						<i class="icon-plus-sign-alt"></i>&nbsp;&nbsp;Add Idea
 					</button>
 				</form>
@@ -48,7 +48,12 @@
 				</div>
 			</section>
 			<div class="row-fluid">
-				<ul class="thumbnails" id="idea-list"></ul>
+				<ul class="thumbnails" data-bind="foreach: {data: $root.themeVM.ideas, as: 'idea'}">
+					<li class="thumbnail span2">
+						<a href="#" class="close pull-right" data-bind="click: $root.themeVM.removeIdea">&times;</a>
+						<p contenteditable="true" data-bind="htmlValue: idea.content"></p>
+					</li>
+				</ul>
 			</div>
 		</section>
 	</article>

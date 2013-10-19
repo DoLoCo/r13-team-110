@@ -1,26 +1,33 @@
-(function (theme, undefined){
-	var $doc = $(document),
-		routes = {};
+Collab.viewModels.ThemeViewModel = function () {
+	var self = this;
 
-	function _bindDescTogle (btnEl) {
-		var btnIcon = btnEl.find('i'),
-			iconClass = btnIcon.attr('class');
-			newIconClass = iconClass === "icon-double-angle-up" ? "icon-double-angle-down" : "icon-double-angle-up";
 
-		$('.theme-desc').slideToggle();
+	self.themeId = null;
+	self.themeTitle = null;
+	self.ideas = ko.observableArray([]);
 
-		btnIcon.attr('class', newIconClass);
-	}
+	self.addIdea = function () {
+		self.ideas.push(new Collab.models.IdeaModel());
+	};
 
-	$doc.on('click', '#add-idea', function (e) {
-		e.preventDefault();
+	self.removeIdea = function (idea) {
+		self.ideas.remove(idea);
+	};
 
-		Collab.idea.openAddIdeaModal();
-	});
+	self.init = function () {
+		var dataModel = $('[data-theme]').data('theme'),
+			theme = dataModel.theme,
+			ideas = theme.ideas;
 
-	$doc.on('click', '#desc-toggle', function (e) {
-		e.preventDefault();
+		self.themeId = theme.id;
+		self.themeTitle = theme.title;
 
-		_bindDescTogle($(this));
-	});
-})(Collab.theme = Collab.theme || {});
+		for (var i = 0; i < ideas.length; i++) {
+			self.ideas.push(new Collab.models.IdeaModel(ideas[i]));
+		}
+	};
+
+	self.init();
+};
+
+Collab.viewModelLocator.themeVM = new Collab.viewModels.ThemeViewModel();

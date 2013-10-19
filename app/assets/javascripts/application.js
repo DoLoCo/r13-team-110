@@ -21,3 +21,5 @@
 //= require collab/idea
 //= require collab/theme
 //= require_self
+
+ko.applyBindings(Collab.viewModelLocator);
