@@ -1,5 +1,5 @@
 class ThemesController < AuthenticatedController
-  before_action :load_theme, only: [:show]
+  load_and_authorize_resource
 
   def show
     respond_with @theme, layout: 'theme'
@@ -15,11 +15,5 @@ class ThemesController < AuthenticatedController
     flash[:notice] = 'Successfully created theme!' if @theme.save
     respond_with @theme
   end
-
-private
-
-  def load_theme
-    @theme = Theme.find(params[:id])
-  end
-
+  
 end
