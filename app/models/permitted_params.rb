@@ -22,4 +22,12 @@ class PermittedParams < Struct.new(:params, :current_user)
   def idea_attributes
     [:content]
   end
+
+  def comment
+    params.require(:comment).permit(*comment_attributes)
+  end
+
+  def comment_attributes
+    [:content]
+  end
 end
