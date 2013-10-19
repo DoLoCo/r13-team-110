@@ -9,8 +9,13 @@ class Api::IdeasController < Api::BaseController
   end
 
   def create
-    @idea.save!
-    respond_with @idea
+    respond_to do |format|
+      if @idea.save
+        format.json { render json: @idea }
+      else
+        format.json { render json: @idea.errors }
+      end
+    end
   end
 
   def update
