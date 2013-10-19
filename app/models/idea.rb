@@ -1,6 +1,6 @@
 class Idea < ActiveRecord::Base
   belongs_to :theme
-  belongs_to :theme_member
+  belongs_to :user
 
   has_many :comments
 end

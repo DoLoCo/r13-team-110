@@ -1,3 +1,3 @@
 class ThemeSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :title, :description
 end
