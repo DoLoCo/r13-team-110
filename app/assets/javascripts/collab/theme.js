@@ -7,9 +7,9 @@ Collab.viewModels.ThemeViewModel = function () {
 	self.members = ko.observableArray([]);
 
 	self.addIdea = function () {
-		var ideaEndpoint = Mustache.to_html(Collab.constants.routes.createIdea, {themeId: self.themeId});
+		var ideasEndpoint = Mustache.to_html(Collab.constants.routes.themeIdeas, {themeId: self.themeId});
 		
-		Collab.utils.callAjaxService(ideaEndpoint, 'post', {idea: {content: 'New Idea'}}).done(function (data) {
+		Collab.utils.callAjaxService(ideasEndpoint, 'post', {idea: {content: 'New Idea'}}).done(function (data) {
 			var idea = new Collab.models.IdeaModel(data.idea);
 
 			self.ideas.push(idea);
@@ -19,7 +19,11 @@ Collab.viewModels.ThemeViewModel = function () {
 	};
 
 	self.removeIdea = function (idea) {
-		self.ideas.remove(idea);
+		var ideaEndpoint = Mustache.to_html(Collab.constants.routes.themeIdea, {themeId: self.themeId, ideaId: idea.ideaId});
+		
+		Collab.utils.callAjaxService(ideaEndpoint, 'delete').done(function (data) {
+			self.ideas.remove(idea);
+		});
 	};
 
 	self.init = function () {

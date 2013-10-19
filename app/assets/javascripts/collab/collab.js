@@ -6,5 +6,6 @@ Collab.models = {};
 
 Collab.constants = {};
 Collab.constants.routes = {
-	createIdea: '/api/themes/{{ themeId }}/ideas'
+	themeIdeas: '/api/themes/{{ themeId }}/ideas',
+	themeIdea: '/api/themes/{{ themeId }}/ideas/{{ ideaId }}'
 };
