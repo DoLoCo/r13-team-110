@@ -1,14 +1,15 @@
 class Api::IdeasController < Api::BaseController
-  before_action :load_theme, only: [:index, :create]
-  before_action :load_idea, only: [:update, :destroy]
+  load_and_authorize_resource :theme
+
+  before_action :load_idea_for_create, only: :create # CanCan workaround
+  load_and_authorize_resource :idea, through: :theme
 
   def index
-    respond_with @ideas = @theme.ideas
+    respond_with @ideas
   end
 
   def create
-    @idea = @theme.ideas.build(permitted_params.idea)
-    @idea.user = current_user
+    @idea.save!
     respond_with @idea
   end
 
@@ -24,11 +25,9 @@ class Api::IdeasController < Api::BaseController
 
 private
 
-  def load_theme
-    @theme = Theme.find(params[:theme_id])
+  def load_idea_for_create
+    @idea = @theme.ideas.build(permitted_params.idea)
+    @idea.user = current_user
   end
 
-  def load_idea
-    @idea = Theme.find(params[:id])
-  end
 end

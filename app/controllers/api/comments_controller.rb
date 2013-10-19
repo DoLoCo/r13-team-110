@@ -1,14 +1,16 @@
 class Api::CommentsController < Api::BaseController
-  before_action :load_idea, only: [:index, :create]
-  before_action :load_comment, only: [:destroy]
+  load_and_authorize_resource :theme
+  load_and_authorize_resource :idea
+
+  before_action :load_comment_for_create, only: :create # CanCan workaround
+  load_and_authorize_resource :comment, through: :idea
 
   def index
-    respond_with @comments = @idea.comments
+    respond_with @comments
   end
 
   def create
-    @comment = @idea.comments.create(permitted_params.comment)
-    @comment.user = current_user
+    @comment.save!
     respond_with @comment
   end
 
@@ -19,11 +21,9 @@ class Api::CommentsController < Api::BaseController
 
 private
 
-  def load_idea
-    @idea = Theme.find(params[:idea_id])
+  def load_comment_for_create
+    @comment = @idea.comments.build(permitted_params.comment)
+    @comment.user = current_user
   end
 
-  def load_comment
-    @comment = Comment.find(params[:id])
-  end
 end

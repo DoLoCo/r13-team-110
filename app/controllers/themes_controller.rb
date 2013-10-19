@@ -1,4 +1,5 @@
 class ThemesController < AuthenticatedController
+  before_action :load_theme_for_create, only: :create # CanCan workaround
   load_and_authorize_resource
 
   def show
@@ -10,10 +11,15 @@ class ThemesController < AuthenticatedController
   end
 
   def create
-    @theme = Theme.new(permitted_params.theme)
     @theme.users << current_user
     flash[:notice] = 'Successfully created theme!' if @theme.save
     respond_with @theme
+  end
+
+private
+
+  def load_theme_for_create
+    @theme = Theme.new(permitted_params.theme)
   end
   
 end

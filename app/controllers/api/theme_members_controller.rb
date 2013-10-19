@@ -1,13 +1,15 @@
 class Api::ThemeMembersController < Api::BaseController
-  before_action :load_theme, only: [:index, :create]
-  before_action :load_theme_member, only: [:destroy]
+  load_and_authorize_resource :theme
+
+  before_action :load_theme_member_for_create, only: :create # CanCan workaround
+  load_and_authorize_resource :theme_member, through: :theme
 
   def index
-    respond_with @theme_members = @theme.theme_members
+    respond_with @theme_members
   end
 
   def create
-    respond_with @theme_member = @theme.theme_members.create(permitted_params.theme_member)
+    respond_with @theme_member
   end
 
   def destroy
@@ -17,12 +19,8 @@ class Api::ThemeMembersController < Api::BaseController
 
 private
 
-  def load_theme
-    @theme = Theme.find(params[:theme_id])
-  end
-
-  def load_theme_member
-    @theme_member = ThemeMember.find(params[:id])
+  def load_theme_member_for_create
+    @theme_member = @theme.theme_members.create(permitted_params.theme_member)
   end
 
 end
