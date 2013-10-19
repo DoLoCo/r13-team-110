@@ -1,4 +1,6 @@
 CollabBrainstorming::Application.routes.draw do
+  get 'home/index'
+
   devise_for :users
 
   namespace :api do
@@ -12,5 +14,5 @@ CollabBrainstorming::Application.routes.draw do
 
   resources :themes, only: [:show, :new, :create]
 
-  root to: 'home#index'
+  root to: 'welcome#index'
 end
