@@ -13,7 +13,8 @@ class ThemesController < ApplicationController
 
   def create
     @theme = Theme.new(permitted_params.theme)
-    # TODO create the initial theme member for the user that created it
+    @theme.users << current_user
+    flash[:notice] = 'Successfully created theme!' if @theme.save
     respond_with @theme
   end
 
