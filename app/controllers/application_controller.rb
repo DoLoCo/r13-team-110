@@ -11,4 +11,11 @@ class ApplicationController < ActionController::Base
     @permitted_params ||= PermittedParams.new(params, current_user)
   end
   helper_method :permitted_params
+
+protected
+
+  def devise_parameter_sanitizer
+    User::ParameterSanitizer.new(User, :user, params)
+  end
+
 end
