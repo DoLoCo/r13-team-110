@@ -18,15 +18,15 @@
 		<![endif]-->
 		<%= csrf_meta_tags %>
 
-		<%= javascript_include_tag "modernizr" %>
+		<%= javascript_include_tag "vendor/modernizr" %>
 	</head>
 	<body>
 		
 		<div class="container-fluid">
 		<%= yield %>
 		</div><!-- /container-fluid -->
-    Test
 
+		<%= render "shared/content_modal" %>
 		<%= javascript_include_tag "application" %>
 	</body>
 </html>

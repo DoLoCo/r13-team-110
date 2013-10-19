@@ -3,23 +3,13 @@
 			<div class="container-fluid">
 				<a class="brand" href="#">Project name | Theme</a>
 				<form class="navbar-form pull-right">
-					<button class="btn btn-primary"><i class="icon-plus-sign-alt"></i>&nbsp;&nbsp;Add Idea</button>
+					<button class="btn btn-primary" id="add-idea">
+						<i class="icon-plus-sign-alt"></i>&nbsp;&nbsp;Add Idea
+					</button>
 				</form>
 			</div>
 		</div>
 	</div><!--/navbar -->
-
-	<section class="row-fluid">
-		<div class="clearfix">
-			<hgroup class="pull-left">
-				<h3>Description</h3>
-				<h4>Constraints</h4>
-			</hgroup>
-
-			<button class="btn pull-right"><i class="icon-double-angle-up"></i></button>
-		</div>
-		<hr>
-	</section>
 
 	<article class="row-fluid">
 		<aside class="span3">
@@ -31,7 +21,7 @@
 				<label class="pull-left">Labels</label>
 				<div class="input-append pull-right">
 				  <input class="input-large" id="appendedInputButton" type="text">
-				  <button class="btn" type="button"><i class="icon-plus"></i></button>
+				  <button class="btn"><i class="icon-plus"></i></button>
 				</div>
 			</form>
 
@@ -47,6 +37,18 @@
 			</div>
 		</aside>
 		<section class="span9">
-			<h4>Placeholder</h4>
+			<section class="row-fluid">
+				<div class="clearfix">
+					<hgroup class="pull-left theme-desc">
+						<h3>Description</h3>
+						<h4>Constraints</h4>
+					</hgroup>
+
+					<button class="btn pull-right" id="desc-toggle"><i class="icon-double-angle-up"></i></button>
+				</div>
+			</section>
+			<div class="row-fluid">
+				<h4>Placeholder</h4>
+			</div>
 		</section>
 	</article>

@@ -13,34 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require private_pub
-//= require bootstrap
+//= require vendor/bootstrap
+//= require collab/collab
+//= require collab/utils
+//= require collab/idea
+//= require collab/theme
 //= require_self
-
-var Collab = Collab || {};
-
-(function (utils, undefined) {
-	var $doc = $(document);
-
-	utils.callAjaxService = function (route, type, data) {
-		$doc.css('cursor', 'wait');
-
-		var srvcCall = $.ajax({
-							'url': route,
-							'type': type,
-							'data': data
-						});
-
-		srvcCall.done(function () {
-			$doc.css('cursor', 'default');
-		}).fail(function (data) {
-			alert(data);
-		});
-
-		return srvcCall;
-	};
-
-})(Collab.utils = Collab.utils || {});
-
-(function (theme, undefined){
-	var routes = {};
-})(Collab.theme = Collab.theme || {});
