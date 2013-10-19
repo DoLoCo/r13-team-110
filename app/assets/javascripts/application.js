@@ -18,6 +18,8 @@
 //= require vendor/knockout
 //= require collab/collab
 //= require collab/utils
+//= require collab/user
+//= require collab/member
 //= require collab/idea
 //= require collab/theme
 //= require_self

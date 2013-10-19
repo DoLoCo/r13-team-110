@@ -62,3 +62,6 @@
 			</div>
 		</section>
 	</article>
+
+	<%= render "shared/content_modal" %>
+	<%= content_tag(:div, '', data: { theme: ThemeSerializer.new(@theme).to_json }) %>
