@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require private_pub
+//= require vendor/mustache
 //= require vendor/bootstrap
 //= require collab/collab
 //= require collab/utils

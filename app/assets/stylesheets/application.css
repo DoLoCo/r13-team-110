@@ -22,6 +22,10 @@ body {
 	min-width: 1024px;
 }
 
+.hidden {
+	display: none;
+}
+
 .theme-desc {
 	position:absolute;
 }

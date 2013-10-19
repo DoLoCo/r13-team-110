@@ -1,5 +1,6 @@
 (function (utils, undefined) {
-	var $doc = $(document);
+	var $doc = $(document),
+		$contentModal = $('#content-modal');
 
 	utils.callAjaxService = function (route, type, data) {
 		$doc.css('cursor', 'wait');
@@ -7,7 +8,8 @@
 		var srvcCall = $.ajax({
 							'url': route,
 							'type': type,
-							'data': data
+							'data': data,
+							'dataType': 'json'
 						});
 
 		srvcCall.done(function () {
@@ -20,17 +22,19 @@
 	};
 
 	utils.showContentModal = function (title, content, onOpen) {
-		var modalEl = $('#content-modal');
+		$contentModal.find('#conent-modal-lbl').text(title);
+		$contentModal.find('.modal-body').html(content);
 
-		modalEl.find('#conent-modal-lbl').text(title);
-		modalEl.find('.modal-body').html(content);
-
-		modalEl.one('show', function () {
+		$contentModal.one('show', function () {
 			if (onOpen)
 				onOpen();
 		});
 
-		modalEl.modal('show');
+		$contentModal.modal('show');
+	};
+
+	utils.hideContentModal = function () {
+		$contentModal.modal('hide');
 	};
 
 })(Collab.utils = Collab.utils || {});
