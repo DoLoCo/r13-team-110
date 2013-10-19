@@ -32,6 +32,8 @@ GEM
     arel (4.0.0)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
+    bootstrap-will_paginate (0.0.10)
+      will_paginate
     builder (3.1.4)
     cancan (1.6.10)
     capistrano (2.15.5)
@@ -227,6 +229,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   american_date
+  bootstrap-will_paginate
   cancan
   capistrano (~> 2.15)
   capybara
