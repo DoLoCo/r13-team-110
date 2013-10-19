@@ -22,6 +22,14 @@ class Ability
       # ---
       # users can manage (CRUD) ideas if they belong to the theme of the idea
       can :manage, Idea, theme_id: theme_ids
+
+      # Comment
+      # ---
+      # users can read and create comments to an idea that belongs to a theme that they are a member of
+      can [:read, :create], Comment, idea: { theme_id: theme_ids }
+
+      # users can destroy comments that they have created
+      can :destroy, Comment, user_id: user.id
     end
   end
 end
