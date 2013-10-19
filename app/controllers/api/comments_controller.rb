@@ -10,8 +10,13 @@ class Api::CommentsController < Api::BaseController
   end
 
   def create
-    @comment.save!
-    respond_with @comment
+    respond_to do |format|
+      if @comment.save
+        format.json { render json: @comment }
+      else
+        format.json { render json: @comment.errors, status: :unprocessable_entity  }
+      end
+    end
   end
 
   def destroy

@@ -13,7 +13,7 @@ class Api::IdeasController < Api::BaseController
       if @idea.save
         format.json { render json: @idea }
       else
-        format.json { render json: @idea.errors }
+        format.json { render json: @idea.errors, status: :unprocessable_entity  }
       end
     end
   end
