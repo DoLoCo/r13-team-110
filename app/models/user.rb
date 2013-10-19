@@ -8,4 +8,6 @@ class User < ActiveRecord::Base
   has_many :themes, through: :theme_members
   has_many :ideas
   has_many :comments
+
+  validates :name, presence: true
 end

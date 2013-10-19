@@ -1,6 +1,4 @@
 CollabBrainstorming::Application.routes.draw do
-  get "theme/new"
-  get "theme/create"
   devise_for :users
 
   namespace :api do
