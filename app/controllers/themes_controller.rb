@@ -1,6 +1,4 @@
-class ThemesController < ApplicationController
-  respond_to :html
-
+class ThemesController < AuthenticatedController
   before_action :load_theme, only: [:show]
 
   def show
