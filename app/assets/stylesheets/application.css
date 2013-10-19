@@ -29,3 +29,5 @@ body {
 .theme-desc {
 	position:absolute;
 }
+
+.tabs-left > .nav-tabs > li > a, .tabs-right > .nav-tabs > li > a { min-width: 0; }

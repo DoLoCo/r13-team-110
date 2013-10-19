@@ -13,9 +13,35 @@
 
 	<article class="row-fluid">
 		<aside class="span3">
-			<ul class="nav nav-tabs nav-stacked">
-				<li><a href="#">Projects</a></li>
-			</ul>
+			<div class="tabbable tabs-right">
+			  <ul class="nav nav-tabs">
+			    <li class="active"><a href="#activity-stream" data-toggle="tab"><i class="icon-time"></i></a></li>
+			    <li><a href="#members" data-toggle="tab"><i class="icon-group"></i></a></li>
+			  </ul>
+			  <div class="tab-content">
+			    <div class="tab-pane" id="activity-stream">
+                  	<ul class="nav nav-tabs nav-stacked">
+						<li><a href="#">Activity</a></li>
+					</ul>
+                </div>
+               	<div class="tab-pane" id="members">
+                  	<div class="input-append">
+						<input class="input-large" id="appendedInputButton" type="text" placeholder="User Email"/>
+						<button class="btn"><i class="icon-plus"></i></button>
+					</div>
+					<ul class="unstyled" data-bind="foreach: {data: $root.themeVM.members, as: 'member'}">
+						<li>
+							<strong data-bind="text: member.user.name"></strong><br />
+							<span data-bind="text: member.user.email"></span>
+						</li>
+					</ul>
+                </div>
+			  </div>
+			</div>
+			<nav class="nav nav-tabs">
+				
+			</nav>
+
 			<hr>
 			<form class="clearfix">
 				<label class="pull-left">Labels</label>
@@ -50,10 +76,10 @@
 			<div class="row-fluid">
 				<ul class="thumbnails" data-bind="foreach: {data: $root.themeVM.ideas, as: 'idea'}">
 					<li class="thumbnail span3">
-						<div class="pull-right clearfix">
-							<a href="#" class="close pull-left"><i class="icon-comments-alt"></i></a>
-							<a href="#" class="close pull-left"><i class="icon-code-fork"></i></a>
-							<a href="#" class="close pull-left" data-bind="click: $root.themeVM.removeIdea">&times;</a>
+						<div class="pull-right btn-group clearfix">
+							<button class="btn btn-small"><i class="icon-comments-alt"></i></button>
+							<button class="btn btn-small"><i class="icon-code-fork"></i></button>
+							<button class="btn btn-small" data-bind="click: $root.themeVM.removeIdea"><i class="icon-remove"></i></button>
 						</div>
 						<p data-bind="visible: !idea.editing(), text: idea.content, click: idea.edit">&nbsp;</p>
     					<textarea data-bind="visible: idea.editing, value: idea.content, hasFocus: idea.editing"></textarea>
