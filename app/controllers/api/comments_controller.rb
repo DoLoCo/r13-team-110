@@ -1,6 +1,4 @@
 class Api::CommentsController < Api::BaseController
-  before_action :authenticate_user!
-
   before_action :load_idea, only: [:index, :create]
   before_action :load_comment, only: [:destroy]
 

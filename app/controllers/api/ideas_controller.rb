@@ -1,6 +1,4 @@
 class Api::IdeasController < Api::BaseController
-  before_action :authenticate_user!
-
   before_action :load_theme, only: [:index, :create]
   before_action :load_idea, only: [:update, :destroy]
 
