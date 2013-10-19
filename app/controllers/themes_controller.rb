@@ -3,7 +3,7 @@ class ThemesController < AuthenticatedController
   load_and_authorize_resource
 
   def index
-    respond_with @themes = @themes.paginate(page: params[:page], per_page: 25)
+    respond_with @themes = @themes.ordered.paginate(page: params[:page], per_page: 25)
   end
 
   def show
