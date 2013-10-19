@@ -1,6 +1,10 @@
 class Api::ThemeMembersController < Api::BaseController
-  before_action :load_theme
+  before_action :load_theme, only: [:index, :create]
   before_action :load_theme_member, only: [:destroy]
+
+  def index
+    respond_with @theme_members = @theme.theme_members
+  end
 
   def create
     respond_with @theme_member = @theme.theme_members.create(permitted_params.theme_member)
