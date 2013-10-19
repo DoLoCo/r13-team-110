@@ -10,4 +10,6 @@ class User < ActiveRecord::Base
   has_many :comments
 
   validates :name, presence: true
+
+  scope :by_email, lambda { |email| where("email LIKE ?", "#{email}%") }
 end
