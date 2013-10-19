@@ -15,6 +15,7 @@
 //= require private_pub
 //= require vendor/mustache
 //= require vendor/bootstrap
+//= require vendor/knockout
 //= require collab/collab
 //= require collab/utils
 //= require collab/idea
