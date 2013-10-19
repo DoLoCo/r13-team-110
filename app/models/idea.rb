@@ -2,7 +2,7 @@ class Idea < ActiveRecord::Base
   belongs_to :theme
   belongs_to :user
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   validates :theme_id, presence: true
   validates :user_id, presence: true
