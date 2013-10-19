@@ -2,12 +2,16 @@ class ThemesController < AuthenticatedController
   before_action :load_theme_for_create, only: :create # CanCan workaround
   load_and_authorize_resource
 
+  def index
+    respond_with @themes
+  end
+
   def show
     respond_with @theme, layout: 'theme'
   end
 
   def new
-    respond_with @theme = Theme.new
+    respond_with @theme
   end
 
   def create

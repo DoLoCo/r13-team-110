@@ -10,7 +10,7 @@ CollabBrainstorming::Application.routes.draw do
     end
   end
 
-  resources :themes, only: [:show, :new, :create]
+  resources :themes, only: [:index, :show, :new, :create]
 
   get 'home', to: 'home#index'
 
