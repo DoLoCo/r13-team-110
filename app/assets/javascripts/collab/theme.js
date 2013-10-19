@@ -7,11 +7,15 @@ Collab.viewModels.ThemeViewModel = function () {
 	self.members = ko.observableArray([]);
 
 	self.addIdea = function () {
-		var idea = new Collab.models.IdeaModel();
+		var ideaEndpoint = Mustache.to_html(Collab.constants.routes.createIdea, {themeId: self.themeId});
+		
+		Collab.utils.callAjaxService(ideaEndpoint, 'post', {idea: {content: 'New Idea'}}).done(function (data) {
+			var idea = new Collab.models.IdeaModel(data.idea);
 
-		self.ideas.push(idea);
+			self.ideas.push(idea);
 
-		idea.editing(true);
+			idea.editing(true);
+		});
 	};
 
 	self.removeIdea = function (idea) {
