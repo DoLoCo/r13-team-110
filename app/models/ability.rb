@@ -5,8 +5,23 @@ class Ability
     if user
       theme_ids = user.theme_members.pluck(:theme_id)
 
+      # Theme
+      # ---
+      # any user can create a theme
       can :create, Theme
+
+      # any user that is a member of the theme can read and update the theme
       can [:read, :update], Theme, id: theme_ids
+
+      # Theme Member
+      # ---
+      # users can read, create, or destroy theme members if they belong to the theme of the theme member
+      can [:read, :create, :destroy], ThemeMember, theme_id: theme_ids
+
+      # Idea
+      # ---
+      # users can manage (CRUD) ideas if they belong to the theme of the idea
+      can :manage, Idea, theme_id: theme_ids
     end
   end
 end
