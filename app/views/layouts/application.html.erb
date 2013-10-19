@@ -1,14 +1,29 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>CollabBrainstorming</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<%= yield %>
+		<title>CollabBrainstorming</title>
 
-</body>
+
+		<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+
+		<!--[if lte IE 7]>
+			<%= stylesheet_link_tag  "font-awesome-ie7", media: "all", "data-turbolinks-track" => true %>
+		<![endif]-->
+		<%= csrf_meta_tags %>
+
+		<%= javascript_include_tag "modernizr", "data-turbolinks-track" => true %>
+	</head>
+	<body>
+
+		<%= yield %>
+
+		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	</body>
 </html>
