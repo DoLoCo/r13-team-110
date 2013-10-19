@@ -9,7 +9,13 @@ class Api::ThemeMembersController < Api::BaseController
   end
 
   def create
-    respond_with @theme_member
+    respond_to do |format|
+      if @theme_members.save
+        format.json { render json: @theme_members }
+      else
+        format.json { render json: @theme_members.errors, status: :unprocessable_entity  }
+      end
+    end
   end
 
   def destroy

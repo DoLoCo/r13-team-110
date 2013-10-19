@@ -5,6 +5,28 @@ Collab.viewModels.ThemeViewModel = function () {
 	self.themeTitle = null;
 	self.ideas = ko.observableArray([]);
 	self.members = ko.observableArray([]);
+	self.newMemberEmail = ko.observable('');
+	self.userSelection = ko.observableArray([]);
+
+	self.addMembers = function (user) {
+		var membersEndpoint = Mustache.to_html(Collab.constants.routes.themeMembers, {themeId: self.themeId});
+
+		console.log(user)
+
+		Collab.utils.callAjaxService(membersEndpoint, 'post', {theme_member: {user_id: user.userId}}).done(function (data) {
+			console.log(data)
+		});
+	};
+
+	self.searchMembers = function () {
+		Collab.utils.callAjaxService(Collab.constants.routes.users, 'get', {email: self.newMemberEmail()}).done(function (data) {
+			for (var i = 0; i < data.users.length; i++) {
+				var user = new Collab.models.UserModel(data.users[i]);
+
+				self.userSelection.push(user);
+			}
+		});
+	};
 
 	self.addIdea = function () {
 		var ideasEndpoint = Mustache.to_html(Collab.constants.routes.themeIdeas, {themeId: self.themeId});

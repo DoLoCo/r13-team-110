@@ -19,48 +19,50 @@
 			    <li><a href="#members" data-toggle="tab"><i class="icon-group"></i></a></li>
 			  </ul>
 			  <div class="tab-content">
-			    <div class="tab-pane" id="activity-stream">
+			    <div class="tab-pane active" id="activity-stream">
                   	<ul class="nav nav-tabs nav-stacked">
 						<li><a href="#">Activity</a></li>
 					</ul>
                 </div>
                	<div class="tab-pane" id="members">
-                  	<div class="input-append">
-						<input class="input-large" id="appendedInputButton" type="text" placeholder="User Email"/>
-						<button class="btn"><i class="icon-plus"></i></button>
+               		<div class="tabbable"> <!-- Only required for left/right tabs -->
+					  <ul class="nav nav-pills">
+					    <li class="active"><a href="#current-members" data-toggle="tab">Current Users</a></li>
+					    <li><a href="#add-new-member" data-toggle="tab">Add User</a></li>
+					  </ul>
+					  <div class="tab-content">
+					    <div class="tab-pane active" id="current-members">
+					      	<ul class="unstyled" data-bind="foreach: {data: $root.themeVM.members, as: 'member'}">
+								<li>
+									<strong data-bind="text: member.user.name"></strong><br />
+									<span data-bind="text: member.user.email"></span>
+								</li>
+							</ul>
+					    </div>
+					    <div class="tab-pane" id="add-new-member">
+					    	<div class="input-append">
+								<input class="input-large" type="text" placeholder="User Email" data-bind="value: $root.themeVM.newMemberEmail" />
+								<button class="btn" data-bind="click: $root.themeVM.searchMembers"><i class="icon-search"></i></button>
+							</div>
+
+							<ul class="unstyled" data-bind="foreach: {data: $root.themeVM.userSelection, as: 'user'}">
+								<li class="clearfix">
+									<div class="pull-left">
+										<strong data-bind="text: user.name"></strong><br />
+										<span data-bind="text: user.email"></span>
+									</div>
+									<button class="btn btn-small" data-bind="click: $root.themeVM.addMembers"><i class="icon-plus"></i></button>
+								</li>
+							</ul>
+					    </div>
+					  </div>
 					</div>
-					<ul class="unstyled" data-bind="foreach: {data: $root.themeVM.members, as: 'member'}">
-						<li>
-							<strong data-bind="text: member.user.name"></strong><br />
-							<span data-bind="text: member.user.email"></span>
-						</li>
-					</ul>
                 </div>
 			  </div>
 			</div>
 			<nav class="nav nav-tabs">
 				
 			</nav>
-
-			<hr>
-			<form class="clearfix">
-				<label class="pull-left">Labels</label>
-				<div class="input-append pull-right">
-				  <input class="input-large" id="appendedInputButton" type="text">
-				  <button class="btn"><i class="icon-plus"></i></button>
-				</div>
-			</form>
-
-			<div class="well">
-				<ul class="unstyled inline">
-					<li>
-						<span class="label label-warning clearfix">
-							<span class="pull-left">Label</span>
-							<a href="#" class="close pull-right">&times;</a>
-						</span>
-					</li>
-				</ul>
-			</div>
 		</aside>
 		<section class="span9">
 			<section class="row-fluid">
