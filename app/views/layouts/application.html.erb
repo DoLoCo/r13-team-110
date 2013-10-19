@@ -3,29 +3,76 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>CollabBrainstorming</title>
+	<title>Collaborative Brainstorming | <%= content_for?(:title) ? ' - ' + content_for(:title) : '' %></title>
 
+	<%= stylesheet_link_tag    "application", media: "all" %>
 
-		<%= stylesheet_link_tag    "application", media: "all" %>
+	<!--[if lte IE 7]>
+		<%= stylesheet_link_tag  "font-awesome-ie7", media: "all" %>
+	<![endif]-->
+	<%= csrf_meta_tags %>
 
-		<!--[if lte IE 7]>
-			<%= stylesheet_link_tag  "font-awesome-ie7", media: "all" %>
-		<![endif]-->
-		<%= csrf_meta_tags %>
-
-		<%= javascript_include_tag "modernizr" %>
-	</head>
-	<body>
-		
-		<div class="container-fluid">
-		<%= yield %>
-		</div><!-- /container-fluid -->
-
-		<%= javascript_include_tag "application" %>
-	</body>
+	<%= javascript_include_tag "modernizr" %>
+</head>
+<body>
+	<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a href="#" class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a href="/" class="brand">Collaborative Brainstorming</a>
+        <div class="container nav-collapse">
+          <% if user_signed_in? -%>
+            <ul class="nav" id="main-nav">
+              <li><a href="#">A Link</a></li>
+            </ul>
+            <ul class="nav pull-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="user-actions-toggler">Signed in as: <%= current_user.name %> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to 'Sign Out', '/users/sign_out', :method => :delete, :id => 'logout-link' %></li>
+                </ul>
+              </li>
+            </ul>
+          <% end -%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="content">
+      <div class="page-header">
+        <div id="notifications">
+          <%= render partial: 'shared/notifications' %>
+        </div>
+        <h1><%= yield :title %> <%= yield :title_html %></h1>
+        <div class="pull-left"><%= yield :page_header_sub %></div>
+        <div class="pull-right"><%= yield :page_header_actions %></div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="row">
+        <div class="span12"><%= yield %></div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <hr>
+    <footer>
+      <div class="row">
+        <div class="span12 centered">
+          Contact information here
+        </div>
+      </div>
+    </footer>
+  </div>
+	<%= javascript_include_tag "application" %>
+</body>
 </html>
