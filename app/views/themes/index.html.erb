@@ -1,0 +1,19 @@
+<% title 'Project Themes' %>
+
+<% if @themes.any? -%>
+  <% @themes.each do |theme| -%>
+    <div>
+      <h3><%= theme.title %></h3>
+      <p><%= simple_format(theme.description) %></p>
+      <div><%= link_to 'View Project Theme', "/themes/#{theme.to_param}", class: 'btn btn-primary' %></div>
+    </div>
+    <hr>
+  <% end -%>
+<% else -%>
+  <div>
+    <h3>No project themes available :(</h3>
+    <p>
+      <%= link_to 'Create New Project Theme?', '/themes/new', class: 'btn btn-info btn-large' %>
+    </p>
+  </div>
+<% end -%>
