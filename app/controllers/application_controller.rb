@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
+    if request.xhr?
+      render json: [], status: :unauthorized
+    else
+      redirect_to root_url, :alert => exception.message
+    end
   end
   
   respond_to :html
