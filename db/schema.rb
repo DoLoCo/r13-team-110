@@ -11,16 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 0) do
-=======
-ActiveRecord::Schema.define(version: 20131019002536) do
-=======
-ActiveRecord::Schema.define(version: 20131019002911) do
->>>>>>> installing devise and generating user
-=======
 ActiveRecord::Schema.define(version: 20131019003153) do
 
   create_table "theme_members", force: true do |t|
@@ -32,7 +22,6 @@ ActiveRecord::Schema.define(version: 20131019003153) do
 
   add_index "theme_members", ["theme_id"], name: "index_theme_members_on_theme_id", using: :btree
   add_index "theme_members", ["user_id"], name: "index_theme_members_on_user_id", using: :btree
->>>>>>> adding theme_members
 
   create_table "themes", force: true do |t|
     t.string   "title"
@@ -40,7 +29,6 @@ ActiveRecord::Schema.define(version: 20131019003153) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
->>>>>>> adding theme model
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
