@@ -32,7 +32,7 @@
         <div class="container nav-collapse">
           <% if user_signed_in? -%>
             <ul class="nav" id="main-nav">
-              <li><a href="#">A Link</a></li>
+              <li><%= link_to 'New Project Theme', new_theme_path %></li>
             </ul>
             <ul class="nav pull-right">
               <li class="dropdown">
@@ -41,6 +41,11 @@
                   <li><%= link_to 'Sign Out', '/users/sign_out', :method => :delete, :id => 'logout-link' %></li>
                 </ul>
               </li>
+            </ul>
+          <% else -%>
+            <ul class="nav pull-right">
+              <li><%= link_to 'Register', '/users/sign_up' %></li>
+              <li><%= link_to 'Sign In', '/users/sign_in' %></li>
             </ul>
           <% end -%>
         </div>
