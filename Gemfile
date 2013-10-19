@@ -21,6 +21,8 @@ gem "cancan"
 gem "american_date"
 gem "simple_form"
 gem "active_model_serializers"
+gem "private_pub"
+gem "thin"
 
 group :test, :development do
   gem "debugger"

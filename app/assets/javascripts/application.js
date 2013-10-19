@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery
+//= require private_pub
 //= require bootstrap
 //= require_self
 
