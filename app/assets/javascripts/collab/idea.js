@@ -11,10 +11,6 @@ Collab.models.IdeaModel = function (model) {
 
 	self.edit = function() { self.editing(true) }
 
-	self.content.subscribe(function () {
-		console.log("save idea");
-	});
-
 	self.init = function (model) {
 		if (model) {
 			self.ideaId = model.id;
@@ -23,4 +19,8 @@ Collab.models.IdeaModel = function (model) {
 	}
 
 	self.init(model);
+
+	self.content.subscribe(function () {
+		Collab.viewModelLocator.themeVM.commitIdea(self);
+	});
 };

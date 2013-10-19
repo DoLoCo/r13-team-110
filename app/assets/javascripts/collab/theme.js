@@ -26,6 +26,12 @@ Collab.viewModels.ThemeViewModel = function () {
 		});
 	};
 
+	self.commitIdea = function (idea) {
+		var ideaEndpoint = Mustache.to_html(Collab.constants.routes.themeIdea, {themeId: self.themeId, ideaId: idea.ideaId});
+
+		Collab.utils.callAjaxService(ideaEndpoint, 'put', {idea: {content: idea.content()}});
+	};
+
 	self.init = function () {
 		var dataModel = $('[data-theme]').data('theme'),
 				theme 		= dataModel.theme,
