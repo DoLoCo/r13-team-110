@@ -1,7 +1,7 @@
 <%= simple_form_for @theme, html: { class: 'form-horizontal', id: 'theme-form' } do |f| %>
   <%= f.error_notification %>
 
-  <%= f.input :title %>
+  <%= f.input :title, input_html: { class: 'span8' } %>
   <%= f.input :description, input_html: { class: 'span8', rows: 10 } %>
 
   <div class="form-actions">
