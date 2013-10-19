@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131019003818) do
+ActiveRecord::Schema.define(version: 20131019005332) do
+
+  create_table "comments", force: true do |t|
+    t.text     "content"
+    t.integer  "idea_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "theme_member_id", null: false
+  end
+
+  add_index "comments", ["idea_id"], name: "index_comments_on_idea_id", using: :btree
+  add_index "comments", ["theme_member_id"], name: "index_comments_on_theme_member_id", using: :btree
 
   create_table "ideas", force: true do |t|
     t.text     "content"
