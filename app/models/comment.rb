@@ -1,4 +1,4 @@
 class Comment < ActiveRecord::Base
   belongs_to :idea
-  belongs_to :theme_member
+  belongs_to :user
 end

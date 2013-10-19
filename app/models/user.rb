@@ -6,6 +6,6 @@ class User < ActiveRecord::Base
 
   has_many :theme_members
   has_many :themes, through: :theme_members
-  has_many :ideas, through: :theme_members
-  has_many :comments, through: :theme_members
+  has_many :ideas
+  has_many :comments
 end
