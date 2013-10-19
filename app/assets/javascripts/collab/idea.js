@@ -3,10 +3,13 @@ Collab.models.IdeaModel = function (model) {
 
 	self.ideaId = guid();
 	self.content = ko.observable('');
+	self.editing = ko.observable(false);
 
 	self.addIdeaComment = function () {
 
 	};
+
+	self.edit = function() { self.editing(true) }
 
 	self.content.subscribe(function () {
 		console.log("save idea");

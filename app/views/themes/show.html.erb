@@ -49,9 +49,14 @@
 			</section>
 			<div class="row-fluid">
 				<ul class="thumbnails" data-bind="foreach: {data: $root.themeVM.ideas, as: 'idea'}">
-					<li class="thumbnail span2">
-						<a href="#" class="close pull-right" data-bind="click: $root.themeVM.removeIdea">&times;</a>
-						<p contenteditable="true" data-bind="htmlValue: idea.content"></p>
+					<li class="thumbnail span3">
+						<div class="pull-right clearfix">
+							<a href="#" class="close pull-left"><i class="icon-comments-alt"></i></a>
+							<a href="#" class="close pull-left"><i class="icon-code-fork"></i></a>
+							<a href="#" class="close pull-left" data-bind="click: $root.themeVM.removeIdea">&times;</a>
+						</div>
+						<p data-bind="visible: !idea.editing(), text: idea.content, click: idea.edit">&nbsp;</p>
+    					<textarea data-bind="visible: idea.editing, value: idea.content, hasFocus: idea.editing"></textarea>
 					</li>
 				</ul>
 			</div>

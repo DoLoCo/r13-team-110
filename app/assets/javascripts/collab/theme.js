@@ -7,7 +7,11 @@ Collab.viewModels.ThemeViewModel = function () {
 	self.ideas = ko.observableArray([]);
 
 	self.addIdea = function () {
-		self.ideas.push(new Collab.models.IdeaModel());
+		var idea = new Collab.models.IdeaModel();
+
+		self.ideas.push(idea);
+
+		idea.editing(true);
 	};
 
 	self.removeIdea = function (idea) {
