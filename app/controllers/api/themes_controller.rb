@@ -19,6 +19,4 @@ private
   def load_theme
     @theme = Theme.find(params[:id])
   end
-
-
 end
