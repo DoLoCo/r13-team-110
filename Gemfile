@@ -11,7 +11,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'jquery-rails'
 gem "jquery-ui-rails"
-gem "haml"
+gem "devise"
 gem "will_paginate"
 gem "has_scope"
 gem "carrierwave"
