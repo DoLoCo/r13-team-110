@@ -1,10 +1,10 @@
 class ThemesController < ApplicationController
   respond_to :html
-  
+
   before_action :load_theme, only: [:show]
 
   def show
-    respond_with @theme
+    respond_with @theme, layout: 'theme'
   end
 
   def new
@@ -13,6 +13,7 @@ class ThemesController < ApplicationController
 
   def create
     @theme = Theme.new(permitted_params.theme)
+    # TODO create the initial theme member for the user that created it
     respond_with @theme
   end
 

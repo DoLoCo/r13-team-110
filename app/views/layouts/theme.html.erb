@@ -11,21 +11,22 @@
 		<title>CollabBrainstorming</title>
 
 
-		<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+		<%= stylesheet_link_tag    "application", media: "all" %>
 
 		<!--[if lte IE 7]>
-			<%= stylesheet_link_tag  "font-awesome-ie7", media: "all", "data-turbolinks-track" => true %>
+			<%= stylesheet_link_tag  "font-awesome-ie7", media: "all" %>
 		<![endif]-->
 		<%= csrf_meta_tags %>
 
-		<%= javascript_include_tag "modernizr", "data-turbolinks-track" => true %>
+		<%= javascript_include_tag "modernizr" %>
 	</head>
 	<body>
 		
 		<div class="container-fluid">
 		<%= yield %>
 		</div><!-- /container-fluid -->
+    Test
 
-		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+		<%= javascript_include_tag "application" %>
 	</body>
 </html>
