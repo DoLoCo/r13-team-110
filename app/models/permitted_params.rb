@@ -15,12 +15,20 @@ class PermittedParams < Struct.new(:params, :current_user)
     [:user_id]
   end
 
+  def group
+    params.require(:group).permit(*group_attributes)
+  end
+
+  def group_attributes
+    [:title, :color]
+  end
+
   def idea
     params.require(:idea).permit(*idea_attributes)
   end
 
   def idea_attributes
-    [:content]
+    [:content, :group_id]
   end
 
   def comment

@@ -18,6 +18,11 @@ class Ability
       # users can read, create, or destroy theme members if they belong to the theme of the theme member
       can [:read, :create, :destroy], ThemeMember, theme_id: theme_ids
 
+      # Group
+      # ---
+      # users can CRUD Group if they are a member of the the theme that the group belongs to
+      can [:read, :create, :update, :destroy], Group, theme_id: theme_ids
+
       # Idea
       # ---
       # users can manage (CRUD) ideas if they belong to the theme of the idea

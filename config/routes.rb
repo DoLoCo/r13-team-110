@@ -10,6 +10,7 @@ CollabBrainstorming::Application.routes.draw do
 
     resources :themes, only: [:show, :create, :update] do
       resources :theme_members, path: '/members', only: [:index, :create, :destroy]
+      resources :groups, only: [:index, :create, :update, :destroy]
       resources :ideas, only: [:index, :create, :update, :destroy] do
         resources :comments, only: [:index, :create, :destroy]
       end
