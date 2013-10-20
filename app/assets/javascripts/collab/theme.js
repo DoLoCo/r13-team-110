@@ -22,6 +22,8 @@ Collab.viewModels.ThemeViewModel = function () {
 			data.comment.userName = self.memberNameMap()[data.comment.user_id];
 			
 			self.ideaComments.push(new Collab.models.CommentModel(data.comment));
+
+			self.newComment('');
 		});
 	};
 
