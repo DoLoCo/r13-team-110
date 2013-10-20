@@ -12,7 +12,7 @@ class Api::ThemesController < Api::BaseController
 
   def update
     if @theme.update(permitted_params.theme)
-      Pusher["theme-#{@theme.id}"].trigger('update', ThemeSerializer.new(@theme).to_json)
+      ThemePublisher.new(@theme).publish_update!
     end
     respond_with @theme
   end

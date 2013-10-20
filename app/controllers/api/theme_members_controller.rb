@@ -11,7 +11,7 @@ class Api::ThemeMembersController < Api::BaseController
   def create
     respond_to do |format|
       if @theme_member.save
-        Pusher["theme-#{@theme.id}"].trigger('member-create', ThemeMemberSerializer.new(@theme_member).to_json)
+        ThemeMemberPublisher.new(@theme, @theme_member).publish_create!
         format.json { render json: @theme_member }
       else
         format.json { render json: @theme_member.errors, status: :unprocessable_entity  }
@@ -21,7 +21,7 @@ class Api::ThemeMembersController < Api::BaseController
 
   def destroy
     @theme_member.destroy
-    Pusher["theme-#{@theme.id}"].trigger('member-remove', ThemeMemberSerializer.new(@theme_member).to_json)
+    ThemeMemberPublisher.new(@theme, @theme_member).publish_destroy!
     respond_with @theme_member
   end
 
