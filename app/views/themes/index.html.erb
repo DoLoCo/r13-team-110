@@ -1,4 +1,4 @@
-<% title 'Project Themes' %>
+<% title "Hi, #{current_user.name}!" %>
 
 <% if @themes.any? -%>
   <%= will_paginate(@themes) %>

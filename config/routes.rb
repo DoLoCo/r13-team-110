@@ -18,7 +18,5 @@ CollabBrainstorming::Application.routes.draw do
 
   resources :themes, only: [:index, :show, :new, :create]
 
-  get 'home', to: 'home#index'
-
   root to: 'welcome#index'
 end
