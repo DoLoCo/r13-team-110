@@ -14,6 +14,10 @@ Collab.models.IdeaModel = function (model) {
 
 	self.edit = function() { self.editing(true) }
 
+	self.addComment = function (comment) {
+		Collab.viewModelLocator.themeVM.pushComment(comment, self.ideaId);
+	};
+
 	self.init = function (model) {
 		if (model) {
 			self.ideaId = model.id;
@@ -26,17 +30,8 @@ Collab.models.IdeaModel = function (model) {
 			self.channel.bind('comment-create', function(data) {
 				console.log('idea#comment-create');
 				console.log(data);
-				if(Collab.viewModelLocator.themeVM.commentIdea().ideaId == self.ideaId) {
-					var comments = Collab.viewModelLocator.themeVM.ideaComments();
-					var commentIds = ko.utils.arrayMap(comments, function(c) {
-						return c.commentId();
-					});
-
-					if($.inArray(commentIds, data.comment.id) == -1) {
-						var comment = new Collab.models.CommentModel(data.comment);
-						Collab.viewModelLocator.themeVM.ideaComments.push(comment);
-					}
-				}
+				
+				self.addComment(data.comment)
 			});
 
 			self.channel.bind('update', function(data) {

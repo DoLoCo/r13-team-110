@@ -15,13 +15,28 @@ Collab.viewModels.ThemeViewModel = function () {
 	self.newComment = ko.observable();
 	self.openComments = ko.observable(false);
 
+	self.pushComment = function (comment, ideaId) {
+		if(self.commentIdea().ideaId == ideaId) {
+			var commentIds = self.commentIdMap;
+
+			console.log($.inArray(commentIds(), comment.id));
+			console.log(commentIds());
+			console.log(comment.id)
+			console.log(commentIds().indexOf(comment.id) )
+
+			if(commentIds().indexOf(comment.id) === -1) {
+				comment.userName = self.memberNameMap()[comment.user_id];
+
+				self.ideaComments.push(new Collab.models.CommentModel(comment));
+			}
+		}
+	};
+
 	self.addComment = function () {
 		var commentsEndpoint = Mustache.to_html(Collab.constants.routes.ideaComments, {themeId: self.themeId, ideaId: self.commentIdea().ideaId});
 
 		Collab.utils.callAjaxService(commentsEndpoint, 'post', {comment: {content: self.newComment()}}).done(function (data) {
-			data.comment.userName = self.memberNameMap()[data.comment.user_id];
-			
-			self.ideaComments.push(new Collab.models.CommentModel(data.comment));
+			self.pushComment(data.comment, self.commentIdea().ideaId);
 
 			self.newComment('');
 		});
@@ -202,6 +217,12 @@ Collab.viewModels.ThemeViewModel = function () {
 		});
 
 		return memberMap;
+	});
+
+	self.commentIdMap = ko.computed(function () {
+		return ko.utils.arrayMap(self.ideaComments(), function(c) {
+				return c.commentId();
+			});
 	});
 };
 
