@@ -17,10 +17,15 @@
 	<aside class="span3" data-bind="template: 'theme-sidebar-tmpl'"></aside>
 			
 	<section class="span9 clearfix">
-		<aside class="span3 pull-left hidden" data-bind="slide: {direction: 'left', toggle: $root.themeVM.openIdeaComment}">
-			<div data-bind="visible: $root.themeVM.openIdeaComment">
-				<h3>This is Some Idea</h3>
-			</div>
+		<aside class="span3 pull-left hidden" data-bind="slide: {direction: 'left', toggle: $root.themeVM.openComments}">
+			<h4 data-bind="text: $root.themeVM.commentIdea().content"></h4>
+
+			<ul data-bind="foreach: {data: $root.themeVM.ideaComments, as: 'comment'}">
+				<li data-bind="text: comment.content"></li>
+			</ul>
+
+			<textarea data-bind="value: $root.themeVM.newComment"></textarea>
+			<button data-bind="click: $root.themeVM.addComment" class="btn btn-large btn-block btn-primary">Add Comment</button>
 		</aside>
 		<main class="span9 pull-left">
 			<section class="row-fluid">

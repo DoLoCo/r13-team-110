@@ -20,6 +20,7 @@
 //= require collab/user
 //= require collab/member
 //= require collab/idea
+//= require collab/comment
 //= require collab/theme
 //= require_self
 
