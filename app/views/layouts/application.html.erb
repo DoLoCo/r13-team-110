@@ -39,7 +39,9 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="user-actions-toggler">Signed in as: <%= current_user.name %> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><%= link_to 'Change Password', edit_user_registration_path %></li>
+                  <% unless current_user.email == User::GUEST_USER_EMAIL -%>
+                    <li><%= link_to 'Change Password', edit_user_registration_path %></li>
+                  <% end -%>
                   <li><%= link_to 'Sign Out', '/users/sign_out', :method => :delete, :id => 'logout-link' %></li>
                 </ul>
               </li>

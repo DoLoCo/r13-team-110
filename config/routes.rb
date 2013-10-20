@@ -19,5 +19,7 @@ CollabBrainstorming::Application.routes.draw do
 
   resources :themes, only: [:index, :show, :new, :create]
 
+  get 'guest', to: 'welcome#guest'
+
   root to: 'welcome#index'
 end
