@@ -108,7 +108,13 @@ Collab.viewModels.ThemeViewModel = function () {
 		self.channel.bind('idea-create', function(data) {
 			console.log('theme#idea-create');
 			console.log(data);
-			// TODO
+			var ideaIds = ko.utils.arrayMap(self.ideas(), function(idea) {
+				return idea.ideaId;
+			});
+			// if we don't have it yet, add it
+			if($.inArray(data.idea.id, ideaIds) == -1) {
+				self.ideas.push(new Collab.models.IdeaModel(data.idea));
+			}
 		});
 
 		self.channel.bind('idea-remove', function(data) {
