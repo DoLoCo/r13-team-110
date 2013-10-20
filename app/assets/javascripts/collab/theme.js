@@ -68,7 +68,8 @@ Collab.viewModels.ThemeViewModel = function () {
 		Collab.utils.callAjaxService(ideasEndpoint, 'post', {idea: {content: 'New Idea'}}).done(function (data) {
 			var idea = self.pushIdea(data.idea);
 
-			idea.editing(true);
+			if (idea)
+				idea.editing(true);
 		});
 	};
 
