@@ -47,15 +47,26 @@ Collab.viewModels.ThemeViewModel = function () {
 		});
 	};
 
+	self.pushIdea = function (idea) {
+		var ideaIds = ko.utils.arrayMap(self.ideas(), function(idea) {
+			return idea.ideaId;
+		});
+
+		// if we don't have it yet, add it
+		if($.inArray(idea.id, ideaIds) === -1) {
+			var newIdea = new Collab.models.IdeaModel(idea);
+			
+			self.ideas.push(newIdea);
+
+			newIdea.editing(true);
+		}
+	};
+
 	self.addIdea = function () {
 		var ideasEndpoint = Mustache.to_html(Collab.constants.routes.themeIdeas, {themeId: self.themeId});
 		
 		Collab.utils.callAjaxService(ideasEndpoint, 'post', {idea: {content: 'New Idea'}}).done(function (data) {
-			var idea = new Collab.models.IdeaModel(data.idea);
-
-			self.ideas.push(idea);
-
-			idea.editing(true);
+			self.pushIdea(data.idea);
 		});
 	};
 
@@ -158,19 +169,10 @@ Collab.viewModels.ThemeViewModel = function () {
 		*/
 
 		self.channel.bind('idea-create', function(data) {
-			var ideaIds = ko.utils.arrayMap(self.ideas(), function(idea) {
-				return idea.ideaId;
-			});
-
-			// if we don't have it yet, add it
-			if($.inArray(data.idea.id, ideaIds) > -1) {
-				self.ideas.push(new Collab.models.IdeaModel(data.idea));
-			}
+			self.pushIdea(data.idea);
 		});
 
 		self.channel.bind('idea-remove', function(data) {
-			console.log('theme#idea-remove');
-			console.log(data);
 			var ideaIds = ko.utils.arrayMap(self.ideas(), function(i) { return i.ideaId });
 			var index = $.inArray(data.idea.id, ideaIds);
 			if(index != -1) {
