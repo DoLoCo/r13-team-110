@@ -38,7 +38,7 @@ Collab.models.IdeaModel = function (model) {
 			self.channel.bind('update', function(data) {
 				console.log('idea#update');
 				console.log(data);
-				// TODO
+				self.content(data.idea.content);
 			});
 		}
 	}
