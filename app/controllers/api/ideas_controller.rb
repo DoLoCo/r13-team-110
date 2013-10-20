@@ -11,6 +11,7 @@ class Api::IdeasController < Api::BaseController
   def create
     respond_to do |format|
       if @idea.save
+        Pusher["theme-#{@theme.id}"].trigger('idea-create', IdeaSerializer.new(@idea).to_json)
         format.json { render json: @idea }
       else
         format.json { render json: @idea.errors, status: :unprocessable_entity  }
@@ -19,12 +20,15 @@ class Api::IdeasController < Api::BaseController
   end
 
   def update
-    @idea.update(permitted_params.idea)
+    if @idea.update(permitted_params.idea)
+      Pusher["theme-#{@theme.id}-idea-#{@idea.id}"].trigger('update', IdeaSerializer.new(@idea).to_json)
+    end
     respond_with @idea
   end
 
   def destroy
     @idea.destroy
+    Pusher["theme-#{@theme.id}"].trigger('idea-remove', IdeaSerializer.new(@idea).to_json)
     respond_with @idea
   end
 

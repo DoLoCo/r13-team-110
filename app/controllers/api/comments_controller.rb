@@ -12,6 +12,7 @@ class Api::CommentsController < Api::BaseController
   def create
     respond_to do |format|
       if @comment.save
+        Pusher["theme-#{@theme.id}-idea-#{@idea.id}"].trigger('comment-create', CommentSerializer.new(@comment).to_json)
         format.json { render json: @comment }
       else
         format.json { render json: @comment.errors, status: :unprocessable_entity  }
@@ -21,6 +22,7 @@ class Api::CommentsController < Api::BaseController
 
   def destroy
     @comment.destroy
+    Pusher["theme-#{@theme.id}-idea-#{@idea.id}"].trigger('comment-remove', CommentSerializer.new(@comment).to_json)
     respond_with @comment
   end
 
