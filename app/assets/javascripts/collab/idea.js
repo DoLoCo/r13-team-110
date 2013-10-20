@@ -26,13 +26,17 @@ Collab.models.IdeaModel = function (model) {
 			self.channel.bind('comment-create', function(data) {
 				console.log('idea#comment-create');
 				console.log(data);
-				// TODO
-			});
+				if(Collab.viewModelLocator.themeVM.commentIdea().ideaId == self.ideaId) {
+					var comments = Collab.viewModelLocator.themeVM.ideaComments();
+					var commentIds = ko.utils.arrayMap(comments, function(c) {
+						return c.commentId();
+					});
 
-			self.channel.bind('comment-remove', function(data) {
-				console.log('idea#comment-remove');
-				console.log(data);
-				// TODO
+					if($.inArray(commentIds, data.comment.id) == -1) {
+						var comment = new Collab.models.CommentModel(data.comment);
+						Collab.viewModelLocator.themeVM.ideaComments.push(comment);
+					}
+				}
 			});
 
 			self.channel.bind('update', function(data) {

@@ -148,13 +148,13 @@ Collab.viewModels.ThemeViewModel = function () {
 			}
 		});
 
+		/*
 		self.channel.bind('member-remove', function(data) {
 			console.log('theme#member-remove');
 			console.log(data);
 			// TODO
 		});
 
-		/*
 		self.channel.bind('group-create', function(data) {
 			console.log('theme#group-create');
 			console.log(data);
