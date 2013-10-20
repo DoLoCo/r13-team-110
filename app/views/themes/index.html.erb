@@ -1,6 +1,13 @@
 <% title "Hi, #{current_user.name}!" %>
 
 <% if @themes.any? -%>
+  <div>
+    <%= form_tag(themes_path, {:method => :get, :class => 'form-search'}) do %>
+      <%= search_field_tag 'search', params[:search], :class => 'input-large search-query' %>
+      <button type="submit" class="btn">Search</button>
+    <% end -%>
+  </div>
+
   <%= will_paginate(@themes) %>
 
   <% @themes.each do |theme| -%>

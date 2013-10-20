@@ -2,8 +2,10 @@ class ThemesController < AuthenticatedController
   before_action :load_theme_for_create, only: :create # CanCan workaround
   load_and_authorize_resource
 
+  has_scope :search, only: :index
+
   def index
-    respond_with @themes = @themes.ordered.paginate(page: params[:page], per_page: 25)
+    respond_with @themes = apply_scopes(@themes).ordered.paginate(page: params[:page], per_page: 25)
   end
 
   def show

@@ -7,5 +7,8 @@ class Theme < ActiveRecord::Base
   validates :title, presence: true
   validates :description, presence: true
 
+  scope :search, lambda { |term|
+    where('title LIKE ?', "%#{term}%")
+  }
   scope :ordered, lambda { order('updated_at DESC') }
 end
