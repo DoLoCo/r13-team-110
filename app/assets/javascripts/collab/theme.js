@@ -12,7 +12,7 @@ Collab.viewModels.ThemeViewModel = function () {
 		var membersEndpoint = Mustache.to_html(Collab.constants.routes.themeMembers, {themeId: self.themeId});
 
 		Collab.utils.callAjaxService(membersEndpoint, 'post', {theme_member: {user_id: user.userId}}).done(function (data) {
-			var member = new Collab.models.MemberModel(data.member);
+			var member = new Collab.models.MemberModel(data.theme_member);
 
 			self.members.push(member);
 		});
