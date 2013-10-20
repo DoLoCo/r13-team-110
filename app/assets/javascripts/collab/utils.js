@@ -75,7 +75,7 @@ ko.bindingHandlers.slide = {
 		srvcCall.done(function () {
 			$doc.css('cursor', 'default');
 		}).fail(function (data) {
-			alert(data);
+			alert('Whoops, there was a problem.')
 		});
 
 		return srvcCall;
