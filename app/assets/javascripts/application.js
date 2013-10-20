@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require vendor/pusher.min.js
 //= require vendor/mustache
 //= require vendor/bootstrap
 //= require vendor/knockout
@@ -23,13 +22,5 @@
 //= require collab/idea
 //= require collab/theme
 //= require_self
-
-var pusher = new Pusher('7f70dfd913c343fdb4d3');
-
-// Pusher Test
-var channel = pusher.subscribe('test_channel');
-channel.bind('my_event', function(data) {
-  alert(data.message);
-});
 
 ko.applyBindings(Collab.viewModelLocator);
