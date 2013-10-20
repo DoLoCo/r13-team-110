@@ -78,7 +78,13 @@ Collab.viewModels.ThemeViewModel = function () {
 		self.channel.bind('member-create', function(data) {
 			console.log('theme#member-create');
 			console.log(data);
-			// TODO
+			var memberIds = ko.utils.arrayMap(self.members(), function(member) {
+				return member.memberId;
+			});
+			// if we don't have it yet, add it
+			if($.inArray(data.theme_member.id, memberIds) == -1) {
+				self.members.push(new Collab.models.MemberModel(data.theme_member));
+			}
 		});
 
 		self.channel.bind('member-remove', function(data) {
