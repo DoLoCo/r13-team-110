@@ -130,6 +130,7 @@ Collab.viewModels.ThemeViewModel = function () {
 			// TODO
 		});
 
+		/*
 		self.channel.bind('group-create', function(data) {
 			console.log('theme#group-create');
 			console.log(data);
@@ -141,6 +142,7 @@ Collab.viewModels.ThemeViewModel = function () {
 			console.log(data);
 			// TODO
 		});
+		*/
 
 		self.channel.bind('idea-create', function(data) {
 			console.log('theme#idea-create');
