@@ -12,58 +12,7 @@
 	</div><!--/navbar -->
 
 	<article class="row-fluid">
-		<aside class="span3">
-			<div class="tabbable tabs-right">
-			  <ul class="nav nav-tabs">
-			    <li class="active"><a href="#activity-stream" data-toggle="tab"><i class="icon-time"></i></a></li>
-			    <li><a href="#members" data-toggle="tab"><i class="icon-group"></i></a></li>
-			  </ul>
-			  <div class="tab-content">
-			    <div class="tab-pane active" id="activity-stream">
-                  	<ul class="nav nav-tabs nav-stacked">
-						<li><a href="#">Activity</a></li>
-					</ul>
-                </div>
-               	<div class="tab-pane" id="members">
-               		<div class="tabbable"> <!-- Only required for left/right tabs -->
-					  <ul class="nav nav-pills">
-					    <li class="active"><a href="#current-members" data-toggle="tab">Current Users</a></li>
-					    <li><a href="#add-new-member" data-toggle="tab">Add User</a></li>
-					  </ul>
-					  <div class="tab-content">
-					    <div class="tab-pane active" id="current-members">
-					      	<ul class="unstyled" data-bind="foreach: {data: $root.themeVM.members, as: 'member'}">
-								<li>
-									<strong data-bind="text: member.user.name"></strong><br />
-									<span data-bind="text: member.user.email"></span>
-								</li>
-							</ul>
-					    </div>
-					    <div class="tab-pane" id="add-new-member">
-					    	<div class="input-append">
-								<input class="input-large" type="text" placeholder="User Email" data-bind="value: $root.themeVM.newMemberEmail" />
-								<button class="btn" data-bind="click: $root.themeVM.searchMembers"><i class="icon-search"></i></button>
-							</div>
-
-							<ul class="unstyled" data-bind="foreach: {data: $root.themeVM.userSelection, as: 'user'}">
-								<li class="clearfix">
-									<div class="pull-left">
-										<strong data-bind="text: user.name"></strong><br />
-										<span data-bind="text: user.email"></span>
-									</div>
-									<button class="btn btn-small" data-bind="click: $root.themeVM.addMembers"><i class="icon-plus"></i></button>
-								</li>
-							</ul>
-					    </div>
-					  </div>
-					</div>
-                </div>
-			  </div>
-			</div>
-			<nav class="nav nav-tabs">
-				
-			</nav>
-		</aside>
+		<aside class="span3" data-bind="template: 'theme-sidebar-tmpl'"></aside>
 		<section class="span9">
 			<section class="row-fluid">
 				<div class="clearfix">
@@ -77,19 +26,79 @@
 			</section>
 			<div class="row-fluid">
 				<ul class="thumbnails" data-bind="foreach: {data: $root.themeVM.ideas, as: 'idea'}">
-					<li class="thumbnail span3">
-						<div class="pull-right btn-group clearfix">
-							<button class="btn btn-small"><i class="icon-comments-alt"></i></button>
-							<button class="btn btn-small"><i class="icon-code-fork"></i></button>
-							<button class="btn btn-small" data-bind="click: $root.themeVM.removeIdea"><i class="icon-remove"></i></button>
-						</div>
-						<p data-bind="visible: !idea.editing(), text: idea.content, click: idea.edit">&nbsp;</p>
-    					<textarea data-bind="visible: idea.editing, value: idea.content, hasFocus: idea.editing"></textarea>
-					</li>
-				</ul>
+					<!-- ko template: 'idea-tmpl' --><!-- /ko -->
+				<ul>
 			</div>
-		</section>
-	</article>
+		</section><!-- section span9 -->
+	</article><!-- /row-fluid -->
 
 	<%= render "shared/content_modal" %>
 	<%= content_tag(:div, '', data: { theme: ThemeSerializer.new(@theme).to_json }) %>
+
+	<script id="theme-activity-tmpl" type="text/html">
+		<ul class="nav nav-tabs nav-stacked">
+			<li><a href="#">Activity</a></li>
+		</ul>
+	</script>
+
+	<script id="theme-members-list-tmpl" type="text/html">
+		<ul class="unstyled" data-bind="foreach: {data: $root.themeVM.members, as: 'member'}">
+			<li>
+				<strong data-bind="text: member.user.name"></strong><br />
+				<span data-bind="text: member.user.email"></span>
+			</li>
+		</ul>
+	</script>
+
+	<script id="theme-member-search-tmpl" type="text/html">
+		<div class="input-append">
+			<input class="input-large" type="text" placeholder="User Email" data-bind="value: $root.themeVM.newMemberEmail" />
+			<button class="btn" data-bind="click: $root.themeVM.searchMembers"><i class="icon-search"></i></button>
+		</div>
+
+		<ul class="unstyled" data-bind="foreach: {data: $root.themeVM.userSelection, as: 'user'}">
+			<li class="clearfix">
+				<div class="pull-left">
+					<strong data-bind="text: user.name"></strong><br />
+					<span data-bind="text: user.email"></span>
+				</div>
+				<button class="btn btn-small" data-bind="click: $root.themeVM.addMembers"><i class="icon-plus"></i></button>
+			</li>
+		</ul>
+	</script>
+
+	<script id="theme-members-tmpl" type="text/html">
+		<ul class="nav nav-pills">
+		    <li class="active"><a href="#current-members" data-toggle="tab">Current Users</a></li>
+		    <li><a href="#add-new-member" data-toggle="tab">Add User</a></li>
+		  </ul>
+		  <div class="tab-content">
+		    <div class="tab-pane active" id="current-members" data-bind="template: 'theme-members-list-tmpl'"></div>
+		    <div class="tab-pane" id="add-new-member" data-bind="template: 'theme-member-search-tmpl'"></div>
+		  </div>
+	</script>
+
+	<script id="theme-sidebar-tmpl" type="text/html">
+		<div class="tabbable tabs-right">
+		  <ul class="nav nav-tabs">
+		    <li class="active"><a href="#activity-stream" data-toggle="tab"><i class="icon-time"></i></a></li>
+		    <li><a href="#members" data-toggle="tab"><i class="icon-group"></i></a></li>
+		  </ul>
+		  <div class="tab-content">
+		    <div class="tab-pane active" id="activity-stream" data-bind="template: 'theme-activity-tmpl'"></div>
+           	<div class="tab-pane" id="members" data-bind="template: 'theme-members-tmpl'"></div>
+          </div>
+		</div>
+	</script>
+
+	<script id="idea-tmpl" type="text/html">
+		<li class="thumbnail span3">
+			<div class="pull-right btn-group clearfix">
+				<button class="btn btn-small"><i class="icon-comments-alt"></i></button>
+				<button class="btn btn-small"><i class="icon-code-fork"></i></button>
+				<button class="btn btn-small" data-bind="click: $root.themeVM.removeIdea"><i class="icon-remove"></i></button>
+			</div>
+			<p data-bind="visible: !idea.editing(), text: idea.content, click: idea.edit">&nbsp;</p>
+			<textarea data-bind="visible: idea.editing, value: idea.content, hasFocus: idea.editing"></textarea>
+		</li>
+	</script>
