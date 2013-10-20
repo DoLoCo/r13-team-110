@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+  <h2><%= link_to @theme.title, theme_url(@theme) %></h2>
+  <p><%= simple_format(@theme.description) %><p>
+  <p>Click <%= link_to 'here', theme_url(@theme) %> to view.</p>
+</body>
+</html>
