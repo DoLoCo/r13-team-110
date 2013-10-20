@@ -20,6 +20,7 @@
 		<aside class="span3 pull-left hidden" data-bind="slide: {direction: 'left', toggle: $root.themeVM.openComments}">
 			<h4 data-bind="text: $root.themeVM.commentIdea().content"></h4>
 
+			<li data-bind="text: $root.themeVM.ideaComments"></li>
 			<ul data-bind="foreach: {data: $root.themeVM.ideaComments, as: 'comment'}">
 				<li data-bind="text: comment.content"></li>
 			</ul>

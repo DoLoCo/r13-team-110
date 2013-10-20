@@ -83,7 +83,7 @@ Collab.viewModels.ThemeViewModel = function () {
 
 				console.log(comment)
 
-				self.ideaComments(comment);
+				self.ideaComments(new Collab.models.CommentModel(comment));
 			}
 			console.log(idea);
 			self.commentIdea(idea);
