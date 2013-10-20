@@ -14,7 +14,20 @@
 
 <article class="row-fluid">
 		   
-	<aside class="span3" data-bind="template: 'theme-sidebar-tmpl'"></aside>
+	<aside class="span3">
+		<div class="tabbable tabs-right">
+		  <ul class="nav nav-tabs">
+			<li class="active"><a href="#description" data-toggle="tab"><i class="icon-align-justify"></i></a></li>
+			<li><a href="#members" data-toggle="tab"><i class="icon-group"></i></a></li>
+		  </ul>
+		  <div class="tab-content">
+			<div class="tab-pane active" id="description">
+				<p><%= @theme.description %></p>
+			</div>
+			<div class="tab-pane" id="members" data-bind="template: 'theme-members-tmpl'"></div>
+		  </div>
+		</div>
+	</aside>
 			
 	<section class="span9 clearfix">
 		<aside class="span3 pull-left hidden" data-bind="slide: {direction: 'left', toggle: $root.themeVM.openComments}">
@@ -29,16 +42,6 @@
 			<button data-bind="click: $root.themeVM.addComment" class="btn btn-large btn-block btn-primary">Add Comment</button>
 		</aside>
 		<main class="span9 pull-left">
-			<section class="row-fluid">
-				<div class="clearfix">
-					<hgroup class="pull-left hidden theme-desc">
-						<h3>Description</h3>
-						<h4>Constraints</h4>
-					</hgroup>
-
-					<button class="btn pull-right" id="desc-toggle"></button> 
-				</div>
-			</section>
 			<div class="row-fluid">
 				<ul class="thumbnails" data-bind="foreach: {data: $root.themeVM.ideas, as: 'idea'}">
 					<!-- ko template: 'idea-tmpl' --><!-- /ko -->
@@ -86,10 +89,6 @@
 			<div class="tab-pane active" id="current-members" data-bind="template: 'theme-members-list-tmpl'"></div>
 			<div class="tab-pane" id="add-new-member" data-bind="template: 'theme-member-search-tmpl'"></div>
 		</div>
-	</script>
-
-	<script id="theme-sidebar-tmpl" type="text/html">
-		<div  id="members" data-bind="template: 'theme-members-tmpl'"></div>
 	</script>
 
 	<script id="idea-tmpl" type="text/html">
