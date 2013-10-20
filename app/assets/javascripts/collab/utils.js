@@ -18,12 +18,7 @@ ko.bindingHandlers.slide = {
 		}
 
 		bindingOptions.toggle.subscribe(function (value) {
-			if (value) {
-				console.log(bindingOptions.direction);
-				$(element).animate({width:'toggle'},350);
-			} else {
-				$(element).hide("slide", { direction: bindingOptions.direction }, 1000);
-			}
+			$(element).animate({width:'toggle'},350);
 		});
 	}	
 };

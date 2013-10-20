@@ -81,6 +81,8 @@ Collab.viewModels.ThemeViewModel = function () {
 			for (var i = 0; i < comments.length; i++) {
 				var comment = comments[i];
 
+				comment.userName = self.memberNameMap()[comment.user_id];
+
 				console.log(comment)
 
 				self.ideaComments(new Collab.models.CommentModel(comment));
@@ -90,6 +92,16 @@ Collab.viewModels.ThemeViewModel = function () {
 
 			self.openComments(true);
 		});
+	};
+
+	self.closeComments = function () {
+		self.openComments(false);
+	};
+
+	self.updateIdeaFromComment = function (comment) {
+		self.commentIdea().content(comment.content());
+
+		self.commitIdea(self.commentIdea());
 	};
 
 	self.init = function () {
@@ -175,6 +187,17 @@ Collab.viewModels.ThemeViewModel = function () {
 	};
 
 	self.init();
+
+	self.memberNameMap = ko.computed(function () {
+		var memberMap = {};
+		
+		ko.utils.arrayMap(self.members(), function (member) {
+			var user = member.user;
+			memberMap[user.userId] = user.name;
+		});
+
+		return memberMap;
+	});
 };
 
 Collab.viewModelLocator.themeVM = new Collab.viewModels.ThemeViewModel();

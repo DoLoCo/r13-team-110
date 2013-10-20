@@ -3,4 +3,5 @@ Collab.models.CommentModel = function (model) {
 
 	self.content = ko.observable(model.content);
 	self.commentId = ko.observable(model.id);
+	self.userName = ko.observable(model.userName);
 };

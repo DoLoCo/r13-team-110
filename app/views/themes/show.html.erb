@@ -22,7 +22,7 @@
 		  </ul>
 		  <div class="tab-content">
 			<div class="tab-pane active" id="description">
-				<p><%= simple_format(@theme.description) %></p>
+				<h4><%= simple_format(@theme.description) %></h4>
 			</div>
 			<div class="tab-pane" id="members" data-bind="template: 'theme-members-tmpl'"></div>
 		  </div>
@@ -31,14 +31,27 @@
 			
 	<section class="span9 clearfix">
 		<aside class="span3 pull-left hidden" data-bind="slide: {direction: 'left', toggle: $root.themeVM.openComments}">
-			<h4 data-bind="text: $root.themeVM.commentIdea().content"></h4>
+			<header class="clearfix">
+				<h4 data-bind="text: $root.themeVM.commentIdea().content" class="pull-left"></h4>
+				<a href="#" class="close pull-right" data-bind="click: $root.themeVM.closeComments">&times;</a>
+			</header>
 
-			<li data-bind="text: $root.themeVM.ideaComments"></li>
-			<ul data-bind="foreach: {data: $root.themeVM.ideaComments, as: 'comment'}">
-				<li data-bind="text: comment.content"></li>
+			<ul data-bind="foreach: {data: $root.themeVM.ideaComments, as: 'comment'}" class="unstyled">
+				<li>
+					<div class="alert alert-info">
+						<strong data-bind="text: comment.userName"></strong>
+						<br>
+						<div class="clearfix">
+							<span class="pull-left" data-bind="text: comment.content"></span>
+							<span class="pull-right" data-bind="click: $root.themeVM.updateIdeaFromComment">
+								<i class="icon-level-up"></i>
+							</span>
+						</div>
+					</div>
+				</li>
 			</ul>
 
-			<textarea data-bind="value: $root.themeVM.newComment"></textarea>
+			<textarea data-bind="value: $root.themeVM.newComment" style="width: 100%"></textarea>
 			<button data-bind="click: $root.themeVM.addComment" class="btn btn-large btn-block btn-primary">Add Comment</button>
 		</aside>
 		<main class="span9 pull-left">
