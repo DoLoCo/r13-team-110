@@ -75,29 +75,46 @@ Collab.viewModels.ThemeViewModel = function () {
 		// set up pub/sub subscriptions
 		self.channel = pusher.subscribe("theme-" + self.themeId);
 
-		self.channel.bind('idea-create', function(data) {
-			console.log('theme#idea-create');
-			console.log(data);
-		});
-
-		self.channel.bind('idea-remove', function(data) {
-			console.log('theme#idea-remove');
-			console.log(data);
-		});
-
 		self.channel.bind('member-create', function(data) {
 			console.log('theme#member-create');
 			console.log(data);
+			// TODO
 		});
 
 		self.channel.bind('member-remove', function(data) {
 			console.log('theme#member-remove');
 			console.log(data);
+			// TODO
+		});
+
+		self.channel.bind('group-create', function(data) {
+			console.log('theme#group-create');
+			console.log(data);
+			// TODO
+		});
+
+		self.channel.bind('group-remove', function(data) {
+			console.log('theme#group-remove');
+			console.log(data);
+			// TODO
+		});
+
+		self.channel.bind('idea-create', function(data) {
+			console.log('theme#idea-create');
+			console.log(data);
+			// TODO
+		});
+
+		self.channel.bind('idea-remove', function(data) {
+			console.log('theme#idea-remove');
+			console.log(data);
+			// TODO
 		});
 
 		self.channel.bind('update', function(data) {
 			console.log('theme#update');
 			console.log(data);
+			// TODO
 		});
 	};
 
