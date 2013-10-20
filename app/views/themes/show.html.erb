@@ -22,7 +22,7 @@
 		  </ul>
 		  <div class="tab-content">
 			<div class="tab-pane active" id="description">
-				<p><%= @theme.description %></p>
+				<p><%= simple_format(@theme.description) %></p>
 			</div>
 			<div class="tab-pane" id="members" data-bind="template: 'theme-members-tmpl'"></div>
 		  </div>
