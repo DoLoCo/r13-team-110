@@ -8,6 +8,26 @@ function guid() {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
+ko.bindingHandlers.slide = {
+	init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+		var $element = $(element),
+			bindingOptions = ko.utils.unwrapObservable(valueAccessor());
+
+		if (!bindingOptions.toggle()) {
+			$element.hide();
+		}
+
+		bindingOptions.toggle.subscribe(function (value) {
+			if (value) {
+				console.log(bindingOptions.direction);
+				$(element).animate({width:'toggle'},350);
+			} else {
+				$(element).hide("slide", { direction: bindingOptions.direction }, 1000);
+			}
+		});
+	}	
+};
+
 (function (utils, undefined) {
 	var $doc = $(document),
 		$contentModal = $('#content-modal');

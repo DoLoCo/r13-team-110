@@ -9,6 +9,8 @@ Collab.viewModels.ThemeViewModel = function () {
 	self.newMemberEmail = ko.observable('');
 	self.userSelection = ko.observableArray([]);
 
+	self.commentIdea = ko.observable(null);
+
 	self.addMembers = function (user) {
 		var membersEndpoint = Mustache.to_html(Collab.constants.routes.themeMembers, {themeId: self.themeId});
 
@@ -53,6 +55,11 @@ Collab.viewModels.ThemeViewModel = function () {
 		var ideaEndpoint = Mustache.to_html(Collab.constants.routes.themeIdea, {themeId: self.themeId, ideaId: idea.ideaId});
 
 		Collab.utils.callAjaxService(ideaEndpoint, 'put', {idea: {content: idea.content()}});
+	};
+
+	self.showIdeaComment = function (idea) {
+		console.log(idea);
+		self.commentIdea(idea);
 	};
 
 	self.init = function () {
@@ -131,6 +138,10 @@ Collab.viewModels.ThemeViewModel = function () {
 	};
 
 	self.init();
+
+	self.openIdeaComment = ko.computed(function () {
+		return self.commentIdea() !== null;
+	});
 };
 
 Collab.viewModelLocator.themeVM = new Collab.viewModels.ThemeViewModel();
