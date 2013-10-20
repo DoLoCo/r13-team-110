@@ -5,6 +5,7 @@
     <%= form_tag(themes_path, {:method => :get, :class => 'form-search'}) do %>
       <%= search_field_tag 'search', params[:search], :class => 'input-large search-query' %>
       <button type="submit" class="btn">Search</button>
+      <%= link_to 'Reset', themes_path, class: 'btn' %>
     <% end -%>
   </div>
 
