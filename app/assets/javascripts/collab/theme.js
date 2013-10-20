@@ -58,7 +58,7 @@ Collab.viewModels.ThemeViewModel = function () {
 			
 			self.ideas.push(newIdea);
 
-			newIdea.editing(true);
+			return newIdea;
 		}
 	};
 
@@ -66,7 +66,9 @@ Collab.viewModels.ThemeViewModel = function () {
 		var ideasEndpoint = Mustache.to_html(Collab.constants.routes.themeIdeas, {themeId: self.themeId});
 		
 		Collab.utils.callAjaxService(ideasEndpoint, 'post', {idea: {content: 'New Idea'}}).done(function (data) {
-			self.pushIdea(data.idea);
+			var idea = self.pushIdea(data.idea);
+
+			idea.editing(true);
 		});
 	};
 
