@@ -29,12 +29,11 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <a href="/" class="brand">Collaborative Brainstorming</a>
+        <%= link_to 'Collaborative Brainstorming', (user_signed_in? ? '/themes' : '/'), class: 'brand' %>
         <div class="container nav-collapse">
           <% if user_signed_in? -%>
             <ul class="nav" id="main-nav">
               <li><%= link_to 'New Project Theme', new_theme_path %></li>
-              <li><%= link_to 'My Project Themes', themes_path %></li>
             </ul>
             <ul class="nav pull-right">
               <li class="dropdown">
