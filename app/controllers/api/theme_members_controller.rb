@@ -10,10 +10,10 @@ class Api::ThemeMembersController < Api::BaseController
 
   def create
     respond_to do |format|
-      if @theme_members.save
-        format.json { render json: @theme_members }
+      if @theme_member.save
+        format.json { render json: @theme_member }
       else
-        format.json { render json: @theme_members.errors, status: :unprocessable_entity  }
+        format.json { render json: @theme_member.errors, status: :unprocessable_entity  }
       end
     end
   end
@@ -26,7 +26,7 @@ class Api::ThemeMembersController < Api::BaseController
 private
 
   def load_theme_member_for_create
-    @theme_member = @theme.theme_members.create(permitted_params.theme_member)
+    @theme_member = @theme.theme_members.build(permitted_params.theme_member)
   end
 
 end
