@@ -1,6 +1,7 @@
 Collab.viewModels.ThemeViewModel = function () {
 	var self = this;
 
+	self.channel = null;
 	self.themeId = null;
 	self.themeTitle = null;
 	self.ideas = ko.observableArray([]);
@@ -70,6 +71,34 @@ Collab.viewModels.ThemeViewModel = function () {
 		for (var i = 0; i < ideas.length; i++) {
 			self.ideas.push(new Collab.models.IdeaModel(ideas[i]));
 		}
+
+		// set up pub/sub subscriptions
+		self.channel = pusher.subscribe("theme-" + self.themeId);
+
+		self.channel.bind('idea-create', function(data) {
+			console.log('theme#idea-create');
+			console.log(data);
+		});
+
+		self.channel.bind('idea-remove', function(data) {
+			console.log('theme#idea-remove');
+			console.log(data);
+		});
+
+		self.channel.bind('member-create', function(data) {
+			console.log('theme#member-create');
+			console.log(data);
+		});
+
+		self.channel.bind('member-remove', function(data) {
+			console.log('theme#member-remove');
+			console.log(data);
+		});
+
+		self.channel.bind('update', function(data) {
+			console.log('theme#update');
+			console.log(data);
+		});
 	};
 
 	self.init();
