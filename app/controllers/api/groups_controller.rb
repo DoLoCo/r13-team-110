@@ -1,7 +1,7 @@
 class Api::GroupsController < Api::BaseController
   load_and_authorize_resource :theme
 
-  before_action :load_group_for_create, only: create # CanCan workaround
+  before_action :load_group_for_create, only: :create # CanCan workaround
   load_and_authorize_resource :group, through: :theme
 
   def index
