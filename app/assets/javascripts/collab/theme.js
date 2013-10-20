@@ -19,8 +19,7 @@ Collab.viewModels.ThemeViewModel = function () {
 		var commentsEndpoint = Mustache.to_html(Collab.constants.routes.ideaComments, {themeId: self.themeId, ideaId: self.commentIdea().ideaId});
 
 		Collab.utils.callAjaxService(commentsEndpoint, 'post', {comment: {content: self.newComment()}}).done(function (data) {
-			console.log(data)
-			console.log(self.ideaComments());
+			data.comment.userName = self.memberNameMap()[data.comment.user_id];
 			
 			self.ideaComments.push(new Collab.models.CommentModel(data.comment));
 		});
@@ -85,7 +84,7 @@ Collab.viewModels.ThemeViewModel = function () {
 
 				console.log(comment)
 
-				self.ideaComments(new Collab.models.CommentModel(comment));
+				self.ideaComments.push(new Collab.models.CommentModel(comment));
 			}
 			console.log(idea);
 			self.commentIdea(idea);

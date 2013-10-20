@@ -16,6 +16,7 @@
 
 body {
 	padding-top: 60px;
+	padding-bottom: 60px;
 }
 
 .centered {
@@ -34,8 +35,13 @@ body {
 	position:absolute;
 }
 
-/*.idea-comments {
-	position: absolute;
+.comment-list {
+	overflow-y:scroll;
+	max-height: 500px;
+	padding-right: 10px;
 }
-*/
+
+.idea-thumb {
+	width: 230px !important;
+}
 .tabs-left > .nav-tabs > li > a, .tabs-right > .nav-tabs > li > a { min-width: 0; }

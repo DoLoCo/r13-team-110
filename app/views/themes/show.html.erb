@@ -30,13 +30,13 @@
 	</aside>
 			
 	<section class="span9 clearfix">
-		<aside class="span3 pull-left hidden" data-bind="slide: {direction: 'left', toggle: $root.themeVM.openComments}">
+		<aside class="span3 pull-left hidden comment-wrap" data-bind="slide: {direction: 'left', toggle: $root.themeVM.openComments}">
 			<header class="clearfix">
 				<h4 data-bind="text: $root.themeVM.commentIdea().content" class="pull-left"></h4>
 				<a href="#" class="close pull-right" data-bind="click: $root.themeVM.closeComments">&times;</a>
 			</header>
 
-			<ul data-bind="foreach: {data: $root.themeVM.ideaComments, as: 'comment'}" class="unstyled">
+			<ul data-bind="foreach: {data: $root.themeVM.ideaComments, as: 'comment'}" class="unstyled comment-list">
 				<li>
 					<div class="alert alert-info">
 						<strong data-bind="text: comment.userName"></strong>
@@ -54,7 +54,7 @@
 			<textarea data-bind="value: $root.themeVM.newComment" style="width: 100%"></textarea>
 			<button data-bind="click: $root.themeVM.addComment" class="btn btn-large btn-block btn-primary">Add Comment</button>
 		</aside>
-		<main class="span9 pull-left">
+		<main class="span9 pull-left idea-wrap">
 			<div class="row-fluid">
 				<ul class="thumbnails" data-bind="foreach: {data: $root.themeVM.ideas, as: 'idea'}">
 					<!-- ko template: 'idea-tmpl' --><!-- /ko -->
@@ -105,13 +105,10 @@
 	</script>
 
 	<script id="idea-tmpl" type="text/html">
-		<li class="thumbnail span3">
+		<li class="thumbnail span3 idea-thumb">
 			<div class="pull-right btn-group clearfix">
 				<button class="btn btn-small" data-bind="click: $root.themeVM.showIdeaComment">
 					<i class="icon-comments-alt"></i>
-				</button>
-				<button class="btn btn-small">
-					<i class="icon-code-fork"></i>
 				</button>
 				<button class="btn btn-small" data-bind="click: $root.themeVM.removeIdea">
 					<i class="icon-remove"></i>

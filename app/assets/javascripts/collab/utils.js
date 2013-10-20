@@ -18,6 +18,11 @@ ko.bindingHandlers.slide = {
 		}
 
 		bindingOptions.toggle.subscribe(function (value) {
+			if (value) {
+				$(element).css('visibility', 'visible');
+			} else {
+				$(element).css('visibility', 'hidden');
+			}
 			$(element).animate({width:'toggle'},350);
 		});
 	}	
