@@ -51,12 +51,6 @@
 	<%= render "shared/content_modal" %>
 	<%= content_tag(:div, '', data: { theme: ThemeSerializer.new(@theme).to_json }) %>
 
-	<script id="theme-activity-tmpl" type="text/html">
-		<ul class="nav nav-tabs nav-stacked">
-			<li><a href="#">Activity</a></li>
-		</ul>
-	</script>
-
 	<script id="theme-members-list-tmpl" type="text/html">
 		<ul class="unstyled" data-bind="foreach: {data: $root.themeVM.members, as: 'member'}">
 			<li>
@@ -95,16 +89,7 @@
 	</script>
 
 	<script id="theme-sidebar-tmpl" type="text/html">
-		<div class="tabbable tabs-right">
-		  <ul class="nav nav-tabs">
-			<li class="active"><a href="#activity-stream" data-toggle="tab"><i class="icon-time"></i></a></li>
-			<li><a href="#members" data-toggle="tab"><i class="icon-group"></i></a></li>
-		  </ul>
-		  <div class="tab-content">
-			<div class="tab-pane active" id="activity-stream" data-bind="template: 'theme-activity-tmpl'"></div>
-			<div class="tab-pane" id="members" data-bind="template: 'theme-members-tmpl'"></div>
-		  </div>
-		</div>
+		<div  id="members" data-bind="template: 'theme-members-tmpl'"></div>
 	</script>
 
 	<script id="idea-tmpl" type="text/html">

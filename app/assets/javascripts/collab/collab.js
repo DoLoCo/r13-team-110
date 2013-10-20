@@ -7,6 +7,7 @@ Collab.models = {};
 Collab.constants = {};
 Collab.constants.routes = {
 	users: '/api/users/search',
+	themeGroups: '/api/themes/{{ themeId }}/ideas',
 	themeIdeas: '/api/themes/{{ themeId }}/ideas',
 	themeIdea: '/api/themes/{{ themeId }}/ideas/{{ ideaId }}',
 	themeMembers: '/api/themes/{{ themeId }}/members',
