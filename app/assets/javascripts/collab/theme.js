@@ -74,6 +74,8 @@ Collab.viewModels.ThemeViewModel = function () {
 	self.showIdeaComment = function (idea) {
 		var commentsEndpoint = Mustache.to_html(Collab.constants.routes.ideaComments, {themeId: self.themeId, ideaId: idea.ideaId});
 
+		self.ideaComments([]);
+
 		Collab.utils.callAjaxService(commentsEndpoint, 'get').done(function (data) {
 			var comments = data.comments;
 
@@ -82,11 +84,9 @@ Collab.viewModels.ThemeViewModel = function () {
 
 				comment.userName = self.memberNameMap()[comment.user_id];
 
-				console.log(comment)
-
 				self.ideaComments.push(new Collab.models.CommentModel(comment));
 			}
-			console.log(idea);
+			
 			self.commentIdea(idea);
 
 			self.openComments(true);
