@@ -45,7 +45,9 @@ Collab.models.IdeaModel = function (model) {
 
 	self.init(model);
 
-	self.content.subscribe(function () {
-		Collab.viewModelLocator.themeVM.commitIdea(self);
+	self.editing.subscribe(function (newValue) {
+		if(!newValue) {
+			Collab.viewModelLocator.themeVM.commitIdea(self);
+		}
 	});
 };
