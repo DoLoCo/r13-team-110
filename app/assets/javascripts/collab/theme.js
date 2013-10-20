@@ -157,7 +157,12 @@ Collab.viewModels.ThemeViewModel = function () {
 		self.channel.bind('idea-remove', function(data) {
 			console.log('theme#idea-remove');
 			console.log(data);
-			// TODO
+			var ideaIds = ko.utils.arrayMap(self.ideas(), function(i) { return i.ideaId });
+			var index = $.inArray(data.idea.id, ideaIds);
+			if(index != -1) {
+				var idea = self.ideas.slice(index, index + 1).pop();
+				self.ideas.remove(idea);
+			}
 		});
 
 		self.channel.bind('update', function(data) {
